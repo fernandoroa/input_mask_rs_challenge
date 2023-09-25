@@ -1,0 +1,36 @@
+// not run
+
+// server.js including:
+const express  = require("express");
+const server = express()
+server.use(express.static("public")) // scripts.js
+server.use(express.static("resources")) // inputmask.js
+// ... more server stuff
+
+// file.html or .njk, with:
+<input
+type="text"
+name="percent"
+id="percent"
+placeholder="Percent of something"
+>
+<script src="/inputmask.js"></script>
+<script src="/scripts.js"></script>
+
+// public/scripts.js
+var selector = document.getElementById("percent");
+
+var im = new Inputmask({
+  alias: 'numeric', 
+  allowMinus: false,  
+  digits: "2,4", 
+  suffix: "%"
+});
+
+im.mask(selector);
+
+// resources/inputmask.js file from:
+// https://github.com/RobinHerbots/Inputmask/blob/5.x/dist/inputmask.js
+
+
+
